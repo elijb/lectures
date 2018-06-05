@@ -5,11 +5,24 @@ docker exec -ti ${container_id} /bin/bash
 mkdir NEXUS && cd NEXUS
 yum -y install wget java
 
-wget http://download.sonatype.com/nexus/3/nexus-3.0.0-03-unix.tar.gz
-tar -xvzpf nexus-3.0.0-03-unix.tar.gz
+wget https://download.sonatype.com/nexus/3/latest-unix.tar.gz 
+tar -xvzpf latest-unix.tar.gz
+mkdir -p /opt/nexus/3.12.0
+mv nexus-3.12.0-01/* /opt/nexus/3.12.0/
+mv nexus-3.12.0-01/.install4j/ /opt/nexus/3.12.0/
+ln -s /opt/nexus/3.12.0/ /opt/nexus/current
 
-mkdir -p /opt/nexus/3.0.0
-ln -s /opt/nexus/3.0.0/ /opt/nexus/current
+cat <<EOT >> ~/.bash_profile
+#### NEXUS 3.12.0 #########################
+export NEXUS_HOME=/opt/nexus/current
+export PATH=$PATH:$NEXUS_HOME/bin
+EOT
 
+source ~/.bash_profile
+nexus start
+------------------------------------------
 
+# UPLOAD & DOWNLOAD
+curl -v -u ${NEXUS_USER}:${NEXUS_PASS} --upload-file ${RPM_FOLDER}/${rpmfile} ${NEXUS_URL}/${NEXUS_REPOSITORY}/rpms/${artifact}/${version}/
+wget -nv -P ${RPM_FOLDER} ${NEXUS_URL}/${NEXUS_REPOSITORY}/rpms/${artifact}/${version}/${rpmfile}
 
