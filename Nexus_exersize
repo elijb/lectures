@@ -20,9 +20,17 @@ EOT
 
 source ~/.bash_profile
 nexus start
-------------------------------------------
+
+-------------------------------------------
+In maven a snapshot is defined as an artifact with a version ending in -SNAPSHOT. 
+When deployed, the snapshot is turned into a timestamp. 
+By definition, snapshots are mutable, releases are immutable . 
+This is why Nexus makes you store them separately because usually you don't care if you lose snapshots, 
+but you will care if you lose releases. 
+It makes snapshot cleanup much easier to deal with that way.
+-------------------------------------------
+
 
 # UPLOAD & DOWNLOAD
 curl -v -u ${NEXUS_USER}:${NEXUS_PASS} --upload-file ${RPM_FOLDER}/${rpmfile} ${NEXUS_URL}/${NEXUS_REPOSITORY}/rpms/${artifact}/${version}/
 wget -nv -P ${RPM_FOLDER} ${NEXUS_URL}/${NEXUS_REPOSITORY}/rpms/${artifact}/${version}/${rpmfile}
-
