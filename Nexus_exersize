@@ -1,0 +1,15 @@
+
+container_id=$(docker run --name test -d -it centos:6.9)
+docker exec -ti ${container_id} /bin/bash
+
+mkdir NEXUS && cd NEXUS
+yum -y install wget java
+
+wget http://download.sonatype.com/nexus/3/nexus-3.0.0-03-unix.tar.gz
+tar -xvzpf nexus-3.0.0-03-unix.tar.gz
+
+mkdir -p /opt/nexus/3.0.0
+ln -s /opt/nexus/3.0.0/ /opt/nexus/current
+
+
+
