@@ -1,0 +1,24 @@
+
+Jenkins Integration with Nexus
+------------------------------
+
+1. Install GIT and Maven on Jenkins
+
+1.1 create a "sample" Freestype project
+1.2 Repo URL: https://github.com/eli2983/mavenrepo.git
+1.3 Build => Invoke toyp-level Maven targets => clean compile package deploy
+1.4 Nexus - Maven authentication: vi /etc/maven/settings.xml (~/.m2/settings.xml):
+
+<settings>
+<server>
+	<id>deployment</id>
+	<username>admin</username>
+	<password>admin123</password>
+</server>
+</settings>
+
+2. Create a repository in Sonatype Nexus
+2.1 login: admin:admin123
+2.2 settings button => create repository => maven2 (hosted) => SAMPLE-SNAP => version policy = Snapshot
+2.3 settings button => create repository => maven2 (hosted) => SAMPLE-REL => version policy = Release
+2.4 update pom.xml: <repository> <url> tag with the new repository URL (in both RELEASE and SNAPSHOT sections)
