@@ -3,7 +3,8 @@ container_id=$(docker run --name nexus -p 5001:8081 -d -it centos:6.9)
 docker exec -ti ${container_id} /bin/bash
 
 mkdir NEXUS && cd NEXUS
-yum -y install wget java
+yum -y update
+yum -y install wget java-1.8.0-openjdk
 
 wget https://download.sonatype.com/nexus/3/latest-unix.tar.gz 
 tar -xvzpf latest-unix.tar.gz
