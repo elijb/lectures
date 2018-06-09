@@ -22,3 +22,17 @@ Jenkins Integration with Nexus
 2.2 settings button => create repository => maven2 (hosted) => SAMPLE-SNAP => version policy = Snapshot
 2.3 settings button => create repository => maven2 (hosted) => SAMPLE-REL => version policy = Release
 2.4 update pom.xml: <repository> <url> tag with the new repository URL (in both RELEASE and SNAPSHOT sections)
+
+
+----------------------------
+
+Repository Managers: You can think of a repository like you would think of a library. 
+It is a server that stores and retrieves files, which we refer to as artifacts. 
+When you write a piece of software, you are often depending on external libraries.
+
+In Java, these libraries are stored in binary files called JARs, and if you are working on a complex system, you might require hundreds of external libraries in an application. 
+The primary use of a repository manager is to proxy and cache artifacts from "external" repositories.
+
+Your organization uses open source libraries, and when your build needs them it will automatically query a local repository manager. 
+If that local repository manager does not have that particular artifact, it will retrieve it from an external repository server and cache it for later use.
+
