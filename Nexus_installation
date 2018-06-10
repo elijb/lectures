@@ -1,0 +1,18 @@
+-	cd /opt/  (changing directory)
+-	sudo wget https://download.sonatype.com/nexus/3/latest-unix.tar.gz (downloading the latest Nexus package )
+-	sudo tar -xvzf latest-unix.tar.gz (unpacking the archive under the superuser)
+-	sudo ln -s /opt/nexus-3.12.0-01/bin/nexus /etc/init.d/nexus (adding a symbol link to the services)
+-	cd /etc/init.d (changing directory)
+-	sudo update-rc.d nexus defaults (adding the service to autostart)
+-	sudo service nexus start (starting the service)
+-	sudo vi /opt/sonatype-work/nexus3/etc/nexus.properties (open the configuration and uncomment the port variable with setting 32000:
+
+# Jetty section
+application-port=32000
+# application-host=0.0.0.0
+# nexus-args=${jetty.etc}/jetty.xml,${jetty.etc}/jetty-http.xml,${jetty.etc}/jetty-requestlog.xml
+# nexus-context-path=/
+
+and save the file)
+
+-	sudo service nexus restart (restarting the service)
