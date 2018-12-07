@@ -1,0 +1,6 @@
+node {
+    currentBuild.displayName = "${BUILD_NUMBER}"
+    currentBuild.description = "Build description."
+    println("${JOB_NAME}")
+    echo "Hello. Build number is ${BUILD_NUMBER}"
+}
