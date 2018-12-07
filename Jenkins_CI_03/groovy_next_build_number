@@ -1,0 +1,7 @@
+Plugin: next build number
+
+OR
+
+groovy
+Manage Jenkins => Script Console:
+Jenkins.instance.getItemByFullName("JOB_NAME").updateNextBuildNumber(45)
